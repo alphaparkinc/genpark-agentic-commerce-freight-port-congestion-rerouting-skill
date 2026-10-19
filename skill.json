@@ -1,0 +1,71 @@
+{
+  "name": "genpark-agentic-commerce-freight-port-congestion-rerouting-skill",
+  "title": "Freight Port Congestion Rerouting & Demurrage Sentinel Skill",
+  "version": "1.0.0",
+  "description": "Global ocean container tracking, port berth queue and dwell-time congestion telemetry, demurrage & detention penalty projection, and automated multimodal transshipment rerouting. Built for GenPark (https://www.genpark.ai).",
+  "homepage": "https://www.genpark.ai",
+  "organization": {
+    "name": "GenPark Inc.",
+    "url": "https://www.genpark.ai",
+    "linkedin": "https://www.linkedin.com/company/92955550"
+  },
+  "mcp_version": "2024-11-05",
+  "category": "agentic-commerce",
+  "tools": [
+    {
+      "name": "assess_port_dwell_congestion_risk",
+      "description": "Analyze incoming vessel ETA, port container dwell time, and assess demurrage fine escalation risk.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "port_code": {
+            "type": "string",
+            "description": "e.g. USLAX, USLGB, NLRTM, CNSHA"
+          },
+          "current_median_berth_wait_days": {
+            "type": "number"
+          },
+          "container_free_days_allowed": {
+            "type": "integer"
+          },
+          "daily_demurrage_rate_usd": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "port_code",
+          "current_median_berth_wait_days",
+          "container_free_days_allowed",
+          "daily_demurrage_rate_usd"
+        ]
+      }
+    },
+    {
+      "name": "synthesize_intermodal_reroute_solution",
+      "description": "Calculate trade-off between ocean anchorage waiting fees and expedited intermodal rail/truck bypass from secondary port.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "destination_inland_hub": {
+            "type": "string"
+          },
+          "primary_port_congestion_cost_usd": {
+            "type": "number"
+          },
+          "secondary_port_drayage_cost_usd": {
+            "type": "number"
+          },
+          "secondary_port_rail_cost_usd": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "destination_inland_hub",
+          "primary_port_congestion_cost_usd",
+          "secondary_port_drayage_cost_usd",
+          "secondary_port_rail_cost_usd"
+        ]
+      }
+    }
+  ]
+}
